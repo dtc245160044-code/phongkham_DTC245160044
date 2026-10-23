@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Phòng khám{% endblock %}</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="logo" href="/"><i>+</i> Phòng khám</a>
+  <nav>
+    <a href="/">Trang chủ</a>
+    <a href="/appointments">Đặt lịch khám</a>
+    <a href="/doctors">Bác sĩ</a>
+    <a href="/patients">Bệnh nhân</a>
+  </nav>
+  <a class="btn btn-accent" href="/appointments">Đặt lịch ngay</a>
+</header>
+{% block content %}{% endblock %}
+</body>
+</html>

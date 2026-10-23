@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Bệnh nhân{% endblock %}
+{% block content %}
+<main>
+  <h2>Danh sách bệnh nhân</h2>
+  <div class="panel">
+    <form method="post">
+      <input name="full_name" placeholder="Họ tên" required>
+      <input name="birth_date" type="date">
+      <input name="gender" placeholder="Giới tính">
+      <input name="phone" placeholder="Số điện thoại">
+      <input name="address" placeholder="Địa chỉ">
+      <button class="btn btn-primary btn-small">Thêm bệnh nhân</button>
+    </form>
+  </div>
+  <table>
+    <tr><th>ID</th><th>Họ tên</th><th>Ngày sinh</th><th>Giới tính</th><th>SĐT</th><th>Địa chỉ</th><th></th></tr>
+    {% for r in rows %}
+    <tr>
+      <td>{{ r.id }}</td><td>{{ r.full_name }}</td><td>{{ r.birth_date or '' }}</td>
+      <td>{{ r.gender or '' }}</td><td>{{ r.phone or '' }}</td><td>{{ r.address or '' }}</td>
+      <td><form class="inline" method="post" action="/patients/{{ r.id }}/delete"><button class="btn btn-danger btn-small">Xóa</button></form></td>
+    </tr>
+    {% endfor %}
+  </table>
+</main>
+{% endblock %}

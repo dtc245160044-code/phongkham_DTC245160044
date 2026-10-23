@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Đặt lịch khám{% endblock %}
+{% block content %}
+<main>
+  <h2>Đặt lịch khám</h2>
+  <div class="panel">
+    <form method="post">
+      <select name="patient_id">{% for p in patients %}<option value="{{ p.id }}">{{ p.full_name }}</option>{% endfor %}</select>
+      <select name="doctor_id">{% for d in doctors %}<option value="{{ d.id }}">{{ d.full_name }}</option>{% endfor %}</select>
+      <input name="appointment_time" type="datetime-local" required>
+      <input name="reason" placeholder="Lý do khám">
+      <button class="btn btn-primary btn-small">Đặt lịch</button>
+    </form>
+  </div>
+  <table>
+    <tr><th>ID</th><th>Bệnh nhân</th><th>Bác sĩ</th><th>Thời gian</th><th>Lý do</th><th>Trạng thái</th><th></th></tr>
+    {% for r in rows %}
+    <tr>
+      <td>{{ r.id }}</td><td>{{ r.patient }}</td><td>{{ r.doctor }}</td>
+      <td>{{ r.appointment_time }}</td><td>{{ r.reason or '' }}</td>
+      <td>
+        <form class="inline" method="post" action="/appointments/{{ r.id }}/status">
+          <select name="status">{% for s in statuses %}<option {{ 'selected' if s == r.status }}>{{ s }}</option>{% endfor %}</select>
+          <button class="btn btn-outline btn-small">Lưu</button>
+        </form>
+      </td>
+      <td><form class="inline" method="post" action="/appointments/{{ r.id }}/delete"><button class="btn btn-danger btn-small">Xóa</button></form></td>
+    </tr>
+    {% endfor %}
+  </table>
+</main>
+{% endblock %}
